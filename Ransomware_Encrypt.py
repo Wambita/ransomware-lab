@@ -47,3 +47,16 @@ def encrypt_data(data: bytes, password: str) -> bytes:
     
     # Return the salt, IV, and ciphertext concatenated together
     return salt + iv + ciphertext
+
+def encrypt_file(file_path: str, password: str):
+    """Encrypt and delete the file at the given path."""
+    with open(file_path, 'rb') as f:
+        file_data = f.read()
+    
+    encrypted_data = encrypt_data(file_data, password)
+    new_file_path = file_path + ".enc"
+    # Write the encrypted data back to the file
+    with open(file_path, 'wb') as f:
+        f.write(encrypted_data)
+    os.remove(file_path)
+    print(f"Encrypted and deleted: {file_path} -> {new_file_path}")
