@@ -44,16 +44,14 @@ def main():
      |_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
     """
     print(ascii_art)
+#     # Automatically detect OS and set target directory
+target = os.path.join(os.path.expanduser("~"), "Desktop", "test")
 
-    # Detect operating system
-    #os_type = platform.system()
-    #if os_type == "Windows":
-     #       target = r"C:\\Users\\%USERNAME%\\Desktop\\Nik"
-    #elif os_type == "Linux":
-     #   target = "/root"
-    #else:
-     #   print("Unsupported OS.")
-      #  return
+if not os.path.exists(target):
+    print("Folder does not exist.")
+    exit()
+
+
 
     # Automatically decrypt based on detected OS
     target = "/home/shfana/ransomware-lab/test2"

