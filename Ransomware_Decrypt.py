@@ -1,10 +1,11 @@
+from getpass import getpass
 import os
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
 import platform  # Importing platform module
-from helpers import derive_key, PASSWORD, TOKEN
+from helpers import derive_key, TOKEN
 
 def decrypt_data(encrypted_data: bytes, password: str) -> bytes:
     salt = encrypted_data[:16]
@@ -44,19 +45,18 @@ def main():
      |_|  \_\  \__,_| |_| |_| |___/  \___/  |_| |_| |_|   \_/\_/    \__,_| |_|     \___| 
     """
     print(ascii_art)
-#     # Automatically detect OS and set target directory
-target = os.path.join(os.path.expanduser("~"), "Desktop", "test")
+#  Automatically detect OS and set target directory
+    target = os.path.join(os.path.expanduser("~"), "Desktop", "test")
 
-if not os.path.exists(target):
-    print("Folder does not exist.")
-    exit()
-
-
+    if not os.path.exists(target):
+        print("Folder does not exist.")
+        exit()
 
     # Automatically decrypt based on detected OS
-    target = "/home/shfana/ransomware-lab/test2"
+    token = getpass("Enter the recovery token: ").strip()
+   
     if os.path.isdir(target):
-        decrypt_folder(target, PASSWORD)
+        decrypt_folder(target, token)
         print(f"Decrypted all files in {target}")
     else:
         print(f"Invalid target directory: {target}")
