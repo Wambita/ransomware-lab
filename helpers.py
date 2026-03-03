@@ -18,7 +18,7 @@ def generate_token(length: int = 24) -> str:
 
 # predefined passoword
 TOKEN = generate_token()
-PASSWORD =  "Insert token here"
+
 def derive_key(password: str, salt: bytes)-> bytes:
     """Derive a key from the password using Scrypt KDF."""
     kdf = Scrypt(
