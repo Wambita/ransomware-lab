@@ -1,5 +1,5 @@
 
-# ransomware-lab (Educational Project)
+# Ransomware-lab (Educational Project)
 
 > **Strictly for educational and cybersecurity learning purposes only.**
 > This project is designed to help understand file encryption, key derivation, and secure file handling in a controlled lab environment.
@@ -64,16 +64,16 @@ pip install cryptography
 ```
 
 
-# 🧪 Usage (Safe Educational Testing Only)
+#  Usage (Safe Educational Testing Only)
 
-> ⚠️ **This project must only be used inside a controlled lab environment.**
+>  **This project must only be used inside a controlled lab environment.**
 >
 > Do NOT run this on your main operating system.
 > Do NOT use real personal or important files.
 
 ---
 
-## 🔒 1️⃣ Use a Virtual Machine (Required)
+## 1. Use a Virtual Machine (Required)
 
 For safety, test this project inside a virtual machine (VM).
 
@@ -98,7 +98,7 @@ This ensures:
 
 ---
 
-##  2 Clone the Repository
+##  2. Clone the Repository
 
 Inside your virtual machine:
 
@@ -107,19 +107,28 @@ git clone https://learn.zone01kisumu.ke/git/shfana/ransomware-lab.git
 cd ransomware-lab
 ```
 
-(Replace with your actual repository link.)
-
 ---
 
-## 📦 3️⃣ Install Dependencies
+## 3. Create a virtual environment (Recommended) 
 
 ```bash
-pip install cryptography
+python3 -m venv venv
+source venv/bin/activate # linux/mac os
 ```
 
+- On windows
+```bash
+venv\Scripts\activate
+```
 ---
 
-## 📁 4️⃣ Create a Test Folder
+## 4. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+This will install everything the project needs
+
+## 5. Create a Test Folder
 
 Create a safe folder with dummy files:
 
@@ -129,60 +138,44 @@ mkdir ~/Desktop/test
 
 Add some sample `.txt` files inside the `test` folder.
 
-⚠️ Do NOT use important data.
+ Do NOT use important data.
 
 ---
 
-## 🔐 5️⃣ Encrypt the Folder
+## 5. Encrypt the Folder
 
 Run:
 
 ```bash
-python encrypt.py
+python3 Ransomware_Encrypt.py
 ```
 
 The program will:
 
 * Encrypt files inside `~/Desktop/test`
-* Generate a recovery token
-* Display the token
-
-A recovery page/file will be created containing your generated token.
+* Generate the  recovery token
+* Create a ransomware page informing user that their files have been encrypted and instructions to recover their account (ransomware simulation - educational purposes only)
 
 ---
 
-## 🔑 6️⃣ Save the Generated Token
+## 6. Save the Generated Token
 
-Open the generated file containing the token.
+- Open the generated file containing the token.
 
-Copy the token.
-
----
-
-## 🛠 7️⃣ Add the Token to `helpers.py`
-
-Open:
-
-```
-helpers.py
-```
-
-Locate the password/token variable and paste your copied token there:
-
-```python
-PASSWORD = "PASTE_YOUR_TOKEN_HERE"
-```
-
-Save the file.
+- Copy the token. For simulation purposes, you send the  token to the given email
 
 ---
 
-## 🔓 8️⃣ Decrypt the Files
+### Decryption( Recovering the files (Attacker pov))
+
+## 7. Decrypt the Files
 
 Run:
 
 ```bash
 python decrypt.py
+
+Enter recovery token: (Enter the token that was generated when the  files  were encrypted / code sent to you)
 ```
 
 The program will:
@@ -193,7 +186,7 @@ The program will:
 
 ---
 
-# ⚠️ Safety Guidelines
+#  Safety Guidelines
 
 * Only test inside a virtual machine.
 * Only use dummy test files.
@@ -204,7 +197,7 @@ The program will:
 
 ---
 
-# 🛡 Why Use a VM?
+#  Why Use a VM?
 
 This project intentionally modifies files to simulate encryption behavior.
 
@@ -216,7 +209,7 @@ Using a VM ensures:
 
 ---
 
-# 📚 Educational Purpose
+#  Educational Purpose
 
 This lab is designed to help students understand:
 
@@ -257,53 +250,8 @@ Encrypted file structure:
 4. Padding is removed.
 5. Original file is restored.
 
-⚠️ If the token is incorrect, decryption fails.
+If the token is incorrect, decryption fails.
 
----
-
-## ▶️ How to Use
-
-### 1️⃣ Encrypt a Folder
-
-Make sure your test folder exists:
-
-```bash
-~/Desktop/test
-```
-
-Run:
-
-```bash
-python encrypt.py
-```
-
-The program will:
-
-* Generate a token
-* Encrypt files inside the test folder
-* Display the recovery token
-
-📌 Save the token securely. You will need it to decrypt.
-
----
-
-###  Decrypt Files
-
-Run:
-
-```bash
-python decrypt.py
-```
-
-Enter the previously saved token.
-
-The program will:
-
-* Locate `.enc` files
-* Decrypt them
-* Restore original files
-
----
 
 ## Security Concepts Demonstrated
 
@@ -313,7 +261,7 @@ The program will:
 * Salted password-based encryption
 * Cross-platform filesystem handling
 
----
+
 
 ## Educational Value
 
