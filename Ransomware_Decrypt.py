@@ -52,15 +52,22 @@ def main():
         print("Folder does not exist.")
         exit()
 
-    # Automatically decrypt based on detected OS
+    # Ask user for the recovery token
     token = getpass("Enter the recovery token: ").strip()
    
-    if os.path.isdir(target):
+    if not os.path.isdir(target):
+        print(f"Invalid target directory: {target}")
+        return
+    
+    try:
         decrypt_folder(target, token)
         print(f"Decrypted all files in {target}")
-    else:
-        print(f"Invalid target directory: {target}")
-
+    except ValueError:
+        print("Incorrect token. Decryption failed.")
+        return
+    except Exception as e:
+        print(f"An error occurred during decryption: {e}")
+    
 if __name__ == "__main__":
     main()
 
